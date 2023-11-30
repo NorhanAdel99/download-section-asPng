@@ -1,0 +1,84 @@
+* {
+ box-sizing: border-box;
+}
+html{
+  scroll-behavior: smooth;
+}
+.input {
+  border-radius: 10px;
+  border: 1px solid blueviolet;
+}
+.containBox {
+  overflow: auto;
+  border-radius: 10px;
+}
+.boxContent {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+.boxContent div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 10px;
+}
+
+.boxContent img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  object-fit: cover;
+  border-radius: 10px;
+
+}
+label {
+  display: block;
+
+  margin-bottom: 20px;
+}
+input:checked + .containBox {
+  border: 1px dashed rgb(210, 210, 255);
+  padding: 10px;
+}
+.text p {
+  width: 80%;
+  margin: auto;
+  line-height: 1.4;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  word-break: break-all;
+  overflow: hidden;
+  color: white;
+}
+
+@media print {
+  .boxContent *,
+  .boxContent {
+    visibility: visible;
+    display: block;
+    height: 500px;
+    font-weight: bold;
+    font-size: 30px;
+  }
+  img{
+  width: 300px;
+  height: 300px;}
+}
+.gap-10{
+  gap: 10px;
+}
+

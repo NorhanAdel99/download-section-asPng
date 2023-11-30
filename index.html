@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <!-- meta  -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- // bootstrab // -->
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- // fontawesome // -->
+    <!-- // css // -->
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- ________________ // header // ________________ -->
+    <header></header>
+    <!-- _____________ // body-content // _____________ -->
+    <div class="body-content my-5">
+        <div class="container">
+            <div class="status text-center mb-3"></div>
+            <input type="text" class="inputText form-control ">
+            <div class="div"></div>
+            <div class="my-4">
+                <div class="row justify-content-between">
+                    <div class="col-md-5">
+                        <label for="select1">
+                            <input type="radio" hidden id="select1" name="group" class="input">
+                            <div class="containBox">
+                                <div class="boxContent bla">
+                                    <img src="img/ph1.jpeg" alt="">
+                                    <div class="text">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="select2">
+                            <input type="radio" hidden id="select2" name="group" class="input">
+                            <div class="containBox">
+                                <div class="boxContent">
+                                    <img src="img/ph4.webp" alt="">
+                                    <div class="text">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="select3">
+                            <input type="radio" hidden id="select3" name="group" class="input">
+                            <div class="containBox">
+                                <div class="boxContent printable">
+                                    <img src="img/ph3.webp" alt="">
+                                    <div class="text">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="select4">
+                            <input type="radio" hidden id="select4" name="group" class="input">
+                            <div class="containBox">
+                                <div class="boxContent printable">
+                                    <img src="img/ph4.webp" alt="">
+                                    <div class="text">
+                                        <p></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-5">
+                    <a href="#" class="btn btn-success downloadBtn w-100"> download
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- _______________ // end_Page // _______________ -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/html2canvas.min.js"></script>
+
+    <script>
+
+        let inputs = document.querySelectorAll('.input')
+        let inputText = document.querySelector('.inputText');
+        let div = document.querySelector('.div');
+
+
+        $('input[type="radio"]').on('click change', function (e) {
+            inputs.forEach((input) => {
+                let el = input.nextElementSibling
+                let text = el.querySelector('.text')
+                let p = text.querySelector('p')
+                p.textContent = ''
+                inputText.value = ''
+
+            })
+        });
+        var getCanvas;
+        let el;
+
+        inputText.onkeyup = function () {
+            let inputValue = inputText.value;
+            inputs.forEach((input) => {
+                if (input.checked) {
+                    el = input.nextElementSibling
+                    let text = el.querySelector('.text')
+                    let p = text.querySelector('p')
+                    p.textContent = inputValue
+
+                }
+            })
+        }
+        // ///// after
+        let timer;
+        inputText.addEventListener('keyup', event => {
+            clearTimeout(timer);
+
+            timer = setTimeout(() => {
+                doneTyping(event.target.value);
+            }, 1000);
+        });
+
+        function doneTyping(value) {
+            el.style.border = 'unset'
+            html2canvas(el, {
+                onrendered: function (canvas) {
+                    getCanvas = canvas;
+                }
+            });
+            $(".downloadBtn").on('click', function () {
+                var imgageData = getCanvas.toDataURL("image/png");
+                var newData = imgageData.replace(/^data:image\/png/, "data:application/octet-stream");
+                $(".downloadBtn").attr("download", "your_pic_name.png").attr("href", newData);
+            });
+
+        }      
+    </script>
+
+
+</body>
+
+</html>
